@@ -97,26 +97,52 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-#
+
+#bindkey "^p" up-line-or-search
+#bindkey "^n" down-line-or-search
+autoload -U history-search-end
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
+bindkey "^p" history-beginning-search-backward-end
+bindkey "^n" history-beginning-search-forward-end
+
 export GTK_IM_MODULE=ibus
-export IDF_PATH=/opt/esp32/esp-idf
-export PATH="/opt/esp32/xtensa-esp32-elf/bin:$PATH"
-export PATH="/opt/bin:$PATH"
-export PATH="/opt/android-sdk/platform-tools:$PATH"
+export XMODIFIERS=@im=ibus
+export QT_IM_MODULE=ibus
+#export TERM=ansi
 
-export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libfreetype.so.6
-
+PATH=${PATH}:~/bin
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/thomasthong/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('/home/thomasthong/Workspace/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/home/thomasthong/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/thomasthong/anaconda3/etc/profile.d/conda.sh"
+    if [ -f "/home/thomasthong/Workspace/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/thomasthong/Workspace/miniconda3/etc/profile.d/conda.sh"
     else
-        export PATH="/home/thomasthong/anaconda3/bin:$PATH"
+        export PATH="/home/thomasthong/Workspace/miniconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+
+alias t='todo-txt -d ~/Dropbox/todotxt/config'
+alias v='vim'
+alias vi3c='vim ~/.config/i3/config'
+alias vzc='vim ~/.zshrc'
+alias vc='vim ~/.vimrc'
+
+export TODOTXT_SORT_COMMAND='env LC_COLLATE=C sort -k 2,2 -k 1,1n'
+export TODOTXT_DEFAULT_ACTION=ls
+export PATH=$PATH:~/.platformio/penv/bin
+
+# golang setup
+export PATH=$PATH:/usr/local/go/bin
+export GOPATH=~/Workspace/go/golib
+export PATH=$PATH:$GOPATH/bin
+export GOPATH=$GOPATH:~/Workspace/go/code
+
+# espressif
+export IDF_TOOLS_PATH=/opt/espressif
+alias get_idf='. $HOME/esp/esp-idf/export.sh'
