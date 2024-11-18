@@ -86,7 +86,14 @@ function TurnOffCaps()
     endif
 endfunction
 au InsertLeave * call TurnOffCaps()
-ino <C-C> <Esc>
+ino <C-c> <Esc>
 
 " toggle parse
 set pastetoggle=<F3>
+
+set foldmethod=indent
+set nofoldenable
+set foldnestmax=1
+"set foldcolumn=2
+"highlight FoldColumn guibg=darkgrey guifg=white
+"highlight Folded guifg=PeachPuff4
