@@ -1,11 +1,31 @@
 # Dotfiles and scripts
 
-This repo contains simple dotfiles and some scripts which use to install the necessary program on a new machine or reinstall Debian-base Linux. Tested on ubuntu 20.
+This repository contains dotfiles and scripts to automate the setup of a Debian-based Linux environment (tested on Ubuntu 20+ and Debian Bookworm). It includes configuration for i3, vim, zsh, GTK themes, and various utility scripts for installing and configuring essential applications.
 
-The `install_all.sh` file will run all the scripts end with `.sh` contant in `scripts\` folder. For more detail about scripts, please read at scripts/[README.md](scripts/README.md).
+## Usage
 
-## Credits:
-Some install scrips is taken flowing source.  
-i3-gaps install: https://gist.github.com/boreycutts/6417980039760d9d9dac0dd2148d4783  
-termite script: https://github.com/Corwind/termite-install  
-Inspired by: https://github.com/Soleedus/debian-i3gaps  
+- To install all scripts and dotfiles, run:
+  ```sh
+  ./install_all.sh
+  ```
+  This will execute all `.sh` scripts in the `scripts/` directory in order.
+
+- To install dotfiles only (with backup of existing files), run:
+  ```sh
+  ./install_dotfiles.sh
+  ```
+
+- For details about each script, see [scripts/README.md](scripts/README.md).
+
+## Directory Structure
+
+- `dotfiles/` — Contains configuration files for zsh, vim, i3, gtk, etc.
+- `scripts/` — Installation and setup scripts for various tools and environments.
+- `conf/` — Extra configuration files (e.g., libinput for touchpad).
+- `patch/` — Patches for third-party software.
+- `.config/` — Example configs for GTK, i3, i3status.
+
+## Credits
+
+Some install scripts are adapted from the following sources:  
+- Inspired by: https://github.com/Soleedus/debian-i3gaps

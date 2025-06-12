@@ -1,8 +1,0 @@
-sudo apt install git autoconf automake pkgconf libgtk-3-dev gnome-themes-standard gnome-themes-extra gtk2-engines-murrine sassc inkscape optipng 
-
-git clone https://github.com/jnsh/arc-theme --depth 1 && cd arc-theme
-
-./autogen.sh --prefix=/usr --disable-cinnamon --disable-gnome-shell
-sudo make install
-
-cd ../ && rm -r arc-theme

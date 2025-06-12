@@ -30,8 +30,7 @@ font pango:FontAwesome 8
 floating_modifier $mod
 
 # start a terminal
-# bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -131,7 +130,7 @@ bindsym $mod+shift+8 move container to workspace $workspace8
 bindsym $mod+shift+9 move container to workspace $workspace9
 bindsym $mod+shift+0 move container to workspace $workspace10
 
-assign [class="Joplin"] $workspace2
+assign [class="obsidian"] $workspace8
 assign [class="Firefox"] $workspace3
 assign [class=".*browser.*"] $workspace3
 assign [class=".*chrome.*"] $workspace3
@@ -219,8 +218,8 @@ bindsym $mod+p mode "power system"
 # app mode
 mode "app" {
     #bindsym b exec brave-browser-stable, mode "default" 
-    bindsym b exec google-chrome-stable, mode "default" 
-    bindsym n exec joplin, mode "default"
+    bindsym b exec google-chrome-stable , mode "default" 
+    bindsym n exec obsidian, mode "default"
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
@@ -288,13 +287,16 @@ mode "$mode_gaps_outer" {
         bindsym Escape mode "default"
 }
 
+# Disable focus follow mouse
+focus_follows_mouse no
+
 # volumn blind
 bindsym XF86AudioMute exec amixer sset 'Master' toggle
 bindsym XF86AudioLowerVolume exec amixer sset 'Master' 5%- && notify-send --hint=string:x-dunst-stack-tag:volume "Volume : $(amixer get Master | grep % | awk -F'[][]' '{print $2}')"
 bindsym XF86AudioRaiseVolume exec amixer sset 'Master' 5%+ && notify-send --hint=string:x-dunst-stack-tag:volume "Volume : $(amixer get Master | grep % | awk -F'[][]' '{print $2}')"
 
-bindsym XF86MonBrightnessUp exec sudo light -A 5 && notify-send --hint=string:x-dunst-stack-tag:brightness "Brightness: $(light)" # increase screen brightness
-bindsym XF86MonBrightnessDown exec sudo light -U 5 && notify-send --hint=string:x-dunst-stack-tag:brightness "Brightness: $(light)" # decrease screen brightness
+bindsym XF86MonBrightnessUp exec brightnessctl -q s +5% && notify-send --hint=string:x-dunst-stack-tag:brightness "Brightness: $(brightnessctl g)" # increase screen brightness
+bindsym XF86MonBrightnessDown exec brightnessctl -q s 5%- && notify-send --hint=string:x-dunst-stack-tag:brightness "Brightness: $(brightnessctl g)" # decrease screen brightness
 
 # open explorer
 bindsym $mod+o exec thunar
@@ -303,14 +305,12 @@ bindsym $mod+o exec thunar
 bindsym $mod+b exec flameshot gui
 bindsym Print exec flameshot full -c
 
-# Open network manager
-# exec_always --no-startup-id nm-applet
-
-# Open redshift
-# exec --no-startup-id redshift -v 
-
-# transparent
-# exec --no-startup-id compton -f -I 0.1 -O 0.1 -i 0.9
+# scratchpad config
+# exec --no-startup-id conky
+for_window [instance="Conky"] move scratchpad
+#for_window [con_mark="alsamixer"] move scratchpad
+bindsym $mod+Ctrl+Tab move scratchpad
+bindsym $mod+Tab scratchpad show
 
 # auto run program
 
@@ -318,18 +318,23 @@ bindsym Print exec flameshot full -c
 # exec systemctl --user start psd
 # exec systemctl start asd
 
+# Open lxpokit: use for authentication
+exec --no-startup-id lxpolkit
+
+# Open pulseaudio
+exec --no-startup-id pulseaudio -D
+
+# Open network manager
+exec --no-startup-id nm-tray
+
+# Open redshift
+exec --no-startup-id redshift -l 14.0583:108.2772
+
+# transparent
+# exec --no-startup-id compton -f -I 0.1 -O 0.1 -i 0.9
+
 # execute ibus deamon
-# exec_always --no-startup-id ibus-daemon -d -r -x
-
-# init sound card
-# exec /usr/sbin/alsactl init
-
-# Make scratchpad contain alsamixer
-exec --no-startup-id conky
-for_window [instance="Conky"] move scratchpad
-#for_window [con_mark="alsamixer"] move scratchpad
-bindsym $mod+Ctrl+Tab move scratchpad
-bindsym $mod+Tab scratchpad show
+exec --no-startup-id ibus-daemon -d -r -x
 
 # execute dropbox
 # exec --no-startup-id dropbox start
@@ -338,4 +343,4 @@ bindsym $mod+Tab scratchpad show
 # exec --no-startup-id sudo ryzenadj --stapm-limit=15000 --fast-limit=12000 --slow-limit=12000 --tctl-temp=60 
 
 # limit battery charger
-# exec --no-startup-id sudo bash -c 'echo 60 > /sys/class/power_supply/BAT1/charge_control_end_threshold'
+exec --no-startup-id sudo bash -c 'echo 60 > /sys/class/power_supply/BAT1/charge_control_end_threshold'

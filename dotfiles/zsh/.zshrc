@@ -73,13 +73,6 @@ ZSH_THEME="robbyrussell"
 plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
-alias git=~/bin/git.sh
-alias clang-tidy=~/bin/clang-tidy.sh
-alias make=~/bin/make.sh
-alias m=make
-alias mj='make -j$(nproc)'
-alias check='mkdir -p cppcheckBuild && cppcheck.exe --addon=misra --enable=all --inconclusive --platform=unspecified --cppcheck-build-dir=cppcheckBuild --output-file=cppcheck.log --project=Build/compile_commands.json --suppress=missingInclude'
-PATH=~/bin:$PATH
 
 # User configuration
 
@@ -111,18 +104,12 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-#bindkey "^p" up-line-or-search
-#bindkey "^n" down-line-or-search
-autoload -U history-search-end
-zle -N history-beginning-search-backward-end history-search-end
-zle -N history-beginning-search-forward-end history-search-end
-bindkey "^p" history-beginning-search-backward-end
-bindkey "^n" history-beginning-search-forward-end
-
 export GTK_IM_MODULE=ibus
-export XMODIFIERS=@im=ibus
 export QT_IM_MODULE=ibus
-#export TERM=ansi
+export XMODIFIERS=@im=ibus
+export QT4_IM_MODULE=ibus
+export CLUTTER_IM_MODULE=ibus
+export GLFW_IM_MODULE=ibus
 
 PATH=${PATH}:~/bin
 # >>> conda initialize >>>
@@ -140,14 +127,36 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-alias t='todo-txt -d ~/Dropbox/todotxt/config'
+PATH=~/bin:$PATH
+
+# Simple function 
+function simple_pomodoro() {
+    if [ -n $1 ]
+    then
+        timer=30
+    else
+        timer=$1
+    fi
+    echo pomodoro will end in $timer minutes
+    nohup bash -c "sleep ${timer}m && notify-send pomodoro timeup" > /dev/null 2>&1 &
+}
+
+# alias
 alias v='vim'
 alias vi3c='vim ~/.config/i3/config'
 alias vzc='vim ~/.zshrc'
 alias vc='vim ~/.vimrc'
+alias m=make
+alias mj='make -j$(nproc)'
+if [[ $(grep -i Microsoft /proc/version) ]];
+then
+    alias git=~/bin/git.sh
+    alias clang-tidy=~/bin/clang-tidy.sh
+    alias make=~/bin/make.sh
+    alias check='mkdir -p cppcheckBuild && cppcheck.exe --addon=misra --enable=all --inconclusive --platform=unspecified --cppcheck-build-dir=cppcheckBuild --output-file=cppcheck.log --project=Build/compile_commands.json --suppress=missingInclude'
+fi
 
-export TODOTXT_SORT_COMMAND='env LC_COLLATE=C sort -k 2,2 -k 1,1n'
-export TODOTXT_DEFAULT_ACTION=ls
+# platform io
 export PATH=$PATH:~/.platformio/penv/bin
 
 # golang setup
@@ -159,3 +168,19 @@ export GOPATH=$GOPATH:~/Workspace/go/code
 # espressif
 export IDF_TOOLS_PATH=/opt/espressif
 alias get_idf='. $HOME/esp/esp-idf/export.sh'
+
+# Enable vim binding mode
+bindkey -v
+
+# zoxide
+export PATH=$PATH:~/.local/bin
+eval "$(zoxide init --cmd cd zsh)"
+
+# alacritty zsh completion
+fpath+=${ZDOTDIR:-~}/.zsh_functions
+
+autoload -U history-search-end
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
+bindkey "^p" history-beginning-search-backward-end
+bindkey "^n" history-beginning-search-forward-end
