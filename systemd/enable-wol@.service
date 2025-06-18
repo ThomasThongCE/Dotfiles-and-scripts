@@ -1,0 +1,13 @@
+[Unit]
+Description=Enable Wake-on-LAN for interface %I
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+# %i will be replaced by the instance name (e.g., eth0, enp0s31f6)
+ExecStart=/usr/sbin/ethtool -s %i wol g
+# For a systemd service, it runs as root by default, so no sudo needed inside.
+
+[Install]
+WantedBy=multi-user.target

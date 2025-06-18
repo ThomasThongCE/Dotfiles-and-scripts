@@ -1,9 +1,11 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -e
 set -x
 
 TEMP_DIR=$(pwd)/temp
 GIT_FOLDER=alacritty
+
+sudo apt install curl -y
 
 # install rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
@@ -18,7 +20,7 @@ rm -rf $TEMP_DIR/$GIT_FOLDER
 git clone https://github.com/alacritty/alacritty.git $TEMP_DIR/$GIT_FOLDER
 
 # install dependency 
-sudo apt install cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3 scdoc
+sudo apt install cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3 scdoc -y
 
 # build
 cd $TEMP_DIR/$GIT_FOLDER

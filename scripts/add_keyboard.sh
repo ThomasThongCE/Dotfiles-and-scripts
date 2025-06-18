@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # package contain the add-apt-repository
-sudo apt install software-properties-common -y
+sudo apt install software-properties-common curl -y
 
 # add ibus-bamboo for vietnamese typing
 # Ubuntu repository

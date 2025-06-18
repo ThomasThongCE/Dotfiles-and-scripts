@@ -220,6 +220,7 @@ mode "app" {
     #bindsym b exec brave-browser-stable, mode "default" 
     bindsym b exec google-chrome-stable , mode "default" 
     bindsym n exec obsidian, mode "default"
+    bindsym c exec code, mode "default"
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
@@ -342,5 +343,3 @@ exec --no-startup-id ibus-daemon -d -r -x
 # execute ryzenadj
 # exec --no-startup-id sudo ryzenadj --stapm-limit=15000 --fast-limit=12000 --slow-limit=12000 --tctl-temp=60 
 
-# limit battery charger
-exec --no-startup-id sudo bash -c 'echo 60 > /sys/class/power_supply/BAT1/charge_control_end_threshold'

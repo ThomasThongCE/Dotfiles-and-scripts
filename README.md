@@ -15,6 +15,16 @@ This repository contains dotfiles and scripts to automate the setup of a Debian-
   ./install_dotfiles.sh
   ```
 
+- To install the configuration file in the conf folder, run:
+  ```sh
+  ./install_conf.sh
+  ```
+
+- To install all the systemd services in the systemd folder, run:
+  ```sh
+  ./install_systemd
+  ```
+
 - For details about each script, see [scripts/README.md](scripts/README.md).
 
 ## Directory Structure
@@ -24,6 +34,7 @@ This repository contains dotfiles and scripts to automate the setup of a Debian-
 - `conf/` — Extra configuration files (e.g., libinput for touchpad).
 - `patch/` — Patches for third-party software.
 - `.config/` — Example configs for GTK, i3, i3status.
+- `systemd/` — Systemd service files for battery charge limit and Wake-on-LAN.
 
 ## Credits
 

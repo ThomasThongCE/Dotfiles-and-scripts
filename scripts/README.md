@@ -1,4 +1,4 @@
-# Scripts
+kl# Scripts
 
 This folder contains scripts to automate the installation and configuration of common tools and desktop environment components.  
 **Note:** Run `sudo apt update` before executing these scripts.
@@ -16,7 +16,8 @@ This folder contains scripts to automate the installation and configuration of c
 - `gui-apps.sh` — Install Thunar, lxpolkit, libnotify-bin, lxappearance, qt5ct.
 - `tailscale.sh` — Add Tailscale repository and install Tailscale VPN.
 - `zoxide.sh` — Install zoxide for smarter directory jumping.
-- `install-google-chrome.sh` — (Empty placeholder for Google Chrome installation.)
+- `install-google-chrome.sh` — Install Google Chrome browser.
+- `visual_code.sh` — Install Visual Studio Code editor.
 
 ## Usage
 
@@ -34,4 +35,5 @@ Or run all scripts in order:
 - Some scripts require user interaction or manual steps (e.g., ibus-setup for keyboard input).
 - Dotfiles are managed via GNU Stow in the root install script.
 - For more details on dotfiles, see the `dotfiles/` directory.
+- Systemd service files for battery charge limit and Wake-on-LAN are available in the `systemd/` directory.
 

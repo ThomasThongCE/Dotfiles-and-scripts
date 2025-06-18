@@ -4,5 +4,5 @@
 # lxpolkit: For thunar to mount partition
 # lxappearance: gtk3 theme setting
 # qt5ct: qt theme setting
-sudo apt install thunar lxpolkit libnotify-bin lxappearance qt5ct
+sudo apt install -y thunar lxpolkit libnotify-bin lxappearance qt5ct nm-tray
 
