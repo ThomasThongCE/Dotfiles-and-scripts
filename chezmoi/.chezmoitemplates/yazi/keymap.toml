@@ -1,0 +1,160 @@
+# ── Go-to dirs ───────────────────────────────────────────
+[[mgr.prepend_keymap]]
+on = ["g", "c"]
+run = "cd C:/DEV_AREA/code"
+desc = "Go to DEV_AREA/code"
+
+[[mgr.prepend_keymap]]
+on = ["g", "w"]
+run = "cd C:/Workspace"
+desc = "Go to Workspace"
+
+[[mgr.prepend_keymap]]
+on = ["g", "d"]
+run = "cd C:/Workspace/doc"
+desc = "Go to Workspace/doc"
+
+# ── Open apps: o <app> ────────────────────────────────────
+#   app:      v = neovim,  c = claude — blocking (this pane)
+#   single:   e = explorer,  s(top-level after o) = VS Code
+
+# neovim — opens hovered file (%s)
+[[mgr.prepend_keymap]]
+on = ["o", "v"]
+run = 'shell --block "nvim %s"'
+desc = "Neovim — blocking (this pane)"
+
+# claude — runs in current dir
+[[mgr.prepend_keymap]]
+on = ["o", "c"]
+run = 'shell --block "claude"'
+desc = "Claude — blocking (this pane)"
+
+# explorer — single variant
+[[mgr.prepend_keymap]]
+on = ["o", "e"]
+run = 'shell "explorer ."'
+desc = "Open in Explorer"
+
+# VS Code — single variant (kept from before)
+[[mgr.prepend_keymap]]
+on = ["o", "s"]
+run = 'shell "code ."'
+desc = "Open in VS Code"
+
+# ── Tab switching. The digit keys below are taken by relative-motions, which
+#    shadows the built-in 1-9 tab_switch bindings.
+[[mgr.prepend_keymap]]
+on = ["<A-1>"]
+run = "tab_switch 0"
+desc = "Switch to tab 1"
+
+[[mgr.prepend_keymap]]
+on = ["<A-2>"]
+run = "tab_switch 1"
+desc = "Switch to tab 2"
+
+[[mgr.prepend_keymap]]
+on = ["<A-3>"]
+run = "tab_switch 2"
+desc = "Switch to tab 3"
+
+[[mgr.prepend_keymap]]
+on = ["<A-4>"]
+run = "tab_switch 3"
+desc = "Switch to tab 4"
+
+[[mgr.prepend_keymap]]
+on = ["<A-5>"]
+run = "tab_switch 4"
+desc = "Switch to tab 5"
+
+[[mgr.prepend_keymap]]
+on = ["<A-6>"]
+run = "tab_switch 5"
+desc = "Switch to tab 6"
+
+[[mgr.prepend_keymap]]
+on = ["<A-7>"]
+run = "tab_switch 6"
+desc = "Switch to tab 7"
+
+[[mgr.prepend_keymap]]
+on = ["<A-8>"]
+run = "tab_switch 7"
+desc = "Switch to tab 8"
+
+[[mgr.prepend_keymap]]
+on = ["<A-9>"]
+run = "tab_switch 8"
+desc = "Switch to tab 9"
+
+# ── delta: interactive side-by-side diff, blocking (same pane as yazi) ────
+# Gathers across every tab: each tab contributes its selection, or its hovered
+# file when nothing is selected there.
+[[mgr.prepend_keymap]]
+on = ["<C-d>"]
+run = "plugin diff2"
+desc = "Diff 2 files (delta, cross-tab)"
+
+[[mgr.prepend_keymap]]
+on = ["<C-b>"]
+run = "plugin diff2 -- bc"
+desc = "Diff 2 files (Beyond Compare, cross-tab)"
+
+# ── relative-motions: vim count-jumps (type N then j/k, e.g. 5j 12k 10gg) ─
+[[mgr.prepend_keymap]]
+on = ["1"]
+run = "plugin relative-motions 1"
+desc = "Relative motion 1"
+
+[[mgr.prepend_keymap]]
+on = ["2"]
+run = "plugin relative-motions 2"
+desc = "Relative motion 2"
+
+[[mgr.prepend_keymap]]
+on = ["3"]
+run = "plugin relative-motions 3"
+desc = "Relative motion 3"
+
+[[mgr.prepend_keymap]]
+on = ["4"]
+run = "plugin relative-motions 4"
+desc = "Relative motion 4"
+
+[[mgr.prepend_keymap]]
+on = ["5"]
+run = "plugin relative-motions 5"
+desc = "Relative motion 5"
+
+[[mgr.prepend_keymap]]
+on = ["6"]
+run = "plugin relative-motions 6"
+desc = "Relative motion 6"
+
+[[mgr.prepend_keymap]]
+on = ["7"]
+run = "plugin relative-motions 7"
+desc = "Relative motion 7"
+
+[[mgr.prepend_keymap]]
+on = ["8"]
+run = "plugin relative-motions 8"
+desc = "Relative motion 8"
+
+[[mgr.prepend_keymap]]
+on = ["9"]
+run = "plugin relative-motions 9"
+desc = "Relative motion 9"
+
+# ── jump-to-char: f<char> jumps to next file starting with <char> ─────────
+[[mgr.prepend_keymap]]
+on = "f"
+run = "plugin jump-to-char"
+desc = "Jump to char"
+
+[[mgr.prepend_keymap]]
+on = "F"
+run = "filter --smart"
+desc = "Filter files"

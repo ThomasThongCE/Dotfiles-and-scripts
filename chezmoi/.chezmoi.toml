@@ -1,0 +1,12 @@
+# chezmoi configuration.
+# This file lives in the source directory, so chezmoi reads it as config and
+# does NOT install it to $HOME.
+#
+# Apply this repo's dotfiles with:
+#   chezmoi init --apply --source "$(pwd)/chezmoi"
+# or, on an already-cloned repo:
+#   chezmoi init --apply --source ~/path/to/Dotfiles-and-scripts/chezmoi
+#
+# Cross-platform files (e.g. the PowerShell profile) keep a single source of
+# truth in .chezmoitemplates/ and expose per-OS target wrappers gated above.
+# Per-machine overrides belong in ~/.config/chezmoi/chezmoi.toml, not here.

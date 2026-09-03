@@ -1,0 +1,34 @@
+[open]
+prepend_rules = [
+  # html: o/Enter = browser, O/Shift-Enter = pick browser vs nvim
+  { url = "*.html", use = [ "browser", "edit_here" ] },
+  { url = "*.htm",  use = [ "browser", "edit_here" ] },
+  { url = "*.bat", use = "runbat" },
+  { url = "*.cmd", use = "runbat" },
+  # text files: o/Enter = edit here (blocking), O/Shift-Enter = pick here vs new window
+  { mime = "text/*", use = [ "edit_here", "edit_new" ] },
+]
+
+[opener]
+browser = [
+  { run = 'start "" %s', orphan = true, desc = "Open in default browser" },
+]
+runbat = [
+  { run = 'start "" cmd /c %s1', orphan = true, desc = "Run batch file" },
+]
+edit_here = [
+  { run = 'nvim %s', block = true, desc = "Edit here (blocking, current pane)" },
+]
+edit_new = [
+  { run = '"%APPDATA%\yazi\config\mux-open.cmd" nvim %s', orphan = true, desc = "Edit in new psmux window" },
+]
+
+[[plugin.prepend_fetchers]]
+url   = "*"
+run   = "git"
+group = "git"
+
+[[plugin.prepend_fetchers]]
+url   = "*/"
+run   = "git"
+group = "git"

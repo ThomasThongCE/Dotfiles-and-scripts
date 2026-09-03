@@ -1,42 +1,71 @@
 # Dotfiles and scripts
 
-This repository contains dotfiles and scripts to automate the setup of a Debian-based Linux environment (tested on Ubuntu 20+ and Debian Bookworm). It includes configuration for i3, vim, zsh, GTK themes, and various utility scripts for installing and configuring essential applications.
+Cross-platform dotfiles managed with [chezmoi](https://chezmoi.io), plus a set
+of manual Debian/Ubuntu setup scripts. One repo targets Linux **and** Windows:
+each file's OS is declared in `.chezmoiignore`, so `chezmoi apply` writes only
+the files that belong on the current machine.
 
-## Usage
+## Quick start
 
-- To install all scripts and dotfiles, run:
-  ```sh
-  ./install_all.sh
-  ```
-  This will execute all `.sh` scripts in the `scripts/` directory in order.
+```sh
+# Apply everything managed by chezmoi (dotfiles + AI-agent files):
+chezmoi init --apply --source "$(pwd)/chezmoi"
 
-- To install dotfiles only (with backup of existing files), run:
-  ```sh
-  ./install_dotfiles.sh
-  ```
+# Or run the full bootstrap (chezmoi apply + Linux app scripts):
+./install_all.sh
+```
 
-- To install the configuration file in the conf folder, run:
-  ```sh
-  ./install_conf.sh
-  ```
+Windows (PowerShell): `chezmoi init --apply --source <repo>\chezmoi`
 
-- To install all the systemd services in the systemd folder, run:
-  ```sh
-  ./install_systemd
-  ```
+## How it works
 
-- For details about each script, see [scripts/README.md](scripts/README.md).
+- `chezmoi/` is the chezmoi **source directory**. Every file here maps to a
+  path under `$HOME` (`~`). `dot_`-prefixed names become dotfiles
+  (e.g. `dot_zshrc` → `~/.zshrc`); `dot_config/...` → `~/.config/...`.
+- `.chezmoiignore` is a Go template: Linux-only files are ignored on Windows
+  and vice-versa. Adding an OS-specific file = one line in the right block.
+- Cross-platform software keeps **one** source of truth. The PowerShell profile
+  lives once in `chezmoi/.chezmoitemplates/pwsh_profile.ps1`, and yazi's core
+  config (`yazi.toml`, `keymap.toml`, `init.lua`, `package.toml`) in
+  `chezmoi/.chezmoitemplates/yazi/`. Each is rendered to both OS paths via thin
+  `.tmpl` wrappers: pwsh → `~/Documents/PowerShell/...` (Windows) and
+  `~/.config/powershell/...` (Linux); yazi → `~/AppData/Roaming/yazi/config/...`
+  (Windows) and `~/.config/yazi/...` (Linux). Edit the `.chezmoitemplates` file,
+  not the per-OS wrappers. yazi plugins are restored from `package.toml` via
+  `ya pkg install`, so they are not vendored here.
+- AI-agent files (e.g. `~/.claude/CLAUDE.md`, `.cursorrules`) are a reserved
+  slot: drop them into `chezmoi/` as normal dotfiles when you're ready. They
+  need no structural change.
 
-## Directory Structure
+### OS ownership
 
-- `dotfiles/` — Contains configuration files for zsh, vim, i3, gtk, etc.
-- `scripts/` — Installation and setup scripts for various tools and environments.
-- `conf/` — Extra configuration files (e.g., libinput for touchpad).
-- `patch/` — Patches for third-party software.
-- `.config/` — Example configs for GTK, i3, i3status.
-- `systemd/` — Systemd service files for battery charge limit and Wake-on-LAN.
+| File | OS |
+|------|----|
+| `.zshrc`, `.vimrc`, `.config/i3`, `.config/i3status`, `.config/gtk-3.0` | Linux only |
+| `.psmux.conf`, `AppData/Roaming/herdr/config.toml`, `Documents/PowerShell/...` | Windows only |
+| `.chezmoitemplates/pwsh_profile.ps1`, `.chezmoitemplates/yazi/*` → both OS paths | Cross-platform (one source) |
+
+## Directory structure
+
+- `chezmoi/` — chezmoi source (dotfiles + AI-agent files, cross-platform).
+- `scripts/` — manual Debian/Ubuntu install/setup scripts.
+- `systemd/` — systemd service files (battery limit, Wake-on-LAN).
+- `conf/` — extra config (e.g. libinput).
+- `patch/` — patches for third-party software.
+- `install_all.sh` — bootstrap: `chezmoi apply` + Linux `scripts/`.
+- `install_conf.sh`, `install_systemd.sh` — manual Linux steps (sudo).
+
+## Adding / editing files
+
+```sh
+# Capture an existing file into the source:
+chezmoi add --source "$(pwd)/chezmoi" ~/.vimrc
+# Edit a managed file (renders the template, opens your editor):
+chezmoi edit --source "$(pwd)/chezmoi" ~/.vimrc
+# Preview what would change:
+chezmoi apply --dry-run --source "$(pwd)/chezmoi"
+```
 
 ## Credits
 
-Some install scripts are adapted from the following sources:  
-- Inspired by: https://github.com/Soleedus/debian-i3gaps
+Some install scripts are adapted from https://github.com/Soleedus/debian-i3gaps

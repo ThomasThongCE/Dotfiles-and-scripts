@@ -1,0 +1,30 @@
+# Cross-platform exclusions. Patterns match each entry's target path relative
+# to $HOME and are evaluated as Go templates (chezmoi.io reference/chezmoiignore).
+# Logic is inverted: chezmoi installs everything by default, so we ignore on the
+# OSes where a file must NOT exist.
+
+# ── Linux-only targets: ignore everywhere except linux ──
+{{ if ne .chezmoi.os "linux" }}
+/.zshrc
+/.vimrc
+/.config/i3
+/.config/i3status
+/.config/gtk-3.0
+/.config/powershell/Microsoft.PowerShell_profile.ps1
+/.config/yazi/yazi.toml
+/.config/yazi/keymap.toml
+/.config/yazi/init.lua
+/.config/yazi/package.toml
+{{- end }}
+
+# ── Windows-only targets: ignore everywhere except windows ──
+{{ if ne .chezmoi.os "windows" }}
+/.psmux.conf
+/AppData/Roaming/herdr/config.toml
+/Documents/PowerShell/Microsoft.PowerShell_profile.ps1
+/AppData/Roaming/yazi/config/yazi.toml
+/AppData/Roaming/yazi/config/keymap.toml
+/AppData/Roaming/yazi/config/init.lua
+/AppData/Roaming/yazi/config/package.toml
+/AppData/Roaming/yazi/config/mux-open.cmd
+{{- end }}

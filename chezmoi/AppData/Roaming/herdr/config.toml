@@ -1,0 +1,53 @@
+[terminal]
+default_shell = "pwsh"
+new_cwd = "follow"
+
+[keys]
+prefix = "ctrl+a"
+
+focus_pane_left  = "prefix+h"
+focus_pane_down  = "prefix+j"
+focus_pane_up    = "prefix+k"
+focus_pane_right = "prefix+l"
+
+# v = side by side, s = stacked, as in nvim ctrl+w v / ctrl+w s.
+# | and - are the psmux defaults, kept as aliases.
+split_vertical   = ["prefix+v", "prefix+|"]
+split_horizontal = ["prefix+s", "prefix+minus"]
+
+# settings moved off prefix+s: on a collision herdr keeps settings and
+# silently disables the split binding.
+settings = "prefix+shift+s"
+
+# d matches psmux detach-client; q is the herdr default.
+detach = ["prefix+d", "prefix+q"]
+
+# psmux hardwires ; to last-pane. herdr has no last-tab action.
+last_pane = "prefix+;"
+
+# Agent panel rows, in the order the sidebar shows them.
+previous_agent = "prefix+ctrl+p"
+next_agent     = "prefix+ctrl+n"
+
+# Navigate mode (prefix+w picker, prefix+g navigator).
+# hjkl move panes; ctrl+p / ctrl+n move the workspace selection.
+# These are local to the overlay, so they do not shadow readline ctrl+p
+# or nvim ctrl+n in a pane.
+navigate_workspace_up   = "ctrl+p"
+navigate_workspace_down = "ctrl+n"
+navigate_pane_left  = "h"
+navigate_pane_down  = "j"
+navigate_pane_up    = "k"
+navigate_pane_right = "l"
+
+# Tabs are bare digits (switch_tab); workspaces are alt+digits.
+# [ and ] are avoided: copy_mode owns prefix+[.
+switch_workspace   = "prefix+alt+1..9"
+previous_workspace = "prefix+ctrl+k"
+next_workspace     = "prefix+ctrl+j"
+
+rename_tab = "prefix+,"
+
+[theme]
+name = "nord"
+auto_switch = false
