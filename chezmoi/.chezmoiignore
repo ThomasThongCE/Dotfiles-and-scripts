@@ -10,11 +10,9 @@
 /.config/i3
 /.config/i3status
 /.config/gtk-3.0
-/.config/powershell/Microsoft.PowerShell_profile.ps1
-/.config/yazi/yazi.toml
-/.config/yazi/keymap.toml
-/.config/yazi/init.lua
-/.config/yazi/package.toml
+/.config/powershell
+/.config/yazi
+/.config/nvim
 {{- end }}
 
 # ── Windows-only targets: ignore everywhere except windows ──
@@ -27,4 +25,5 @@
 /AppData/Roaming/yazi/config/init.lua
 /AppData/Roaming/yazi/config/package.toml
 /AppData/Roaming/yazi/config/mux-open.cmd
+/AppData/Local/nvim
 {{- end }}

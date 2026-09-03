@@ -33,6 +33,7 @@ Windows (PowerShell): `chezmoi init --apply --source <repo>\chezmoi`
   (Windows) and `~/.config/yazi/...` (Linux). Edit the `.chezmoitemplates` file,
   not the per-OS wrappers. yazi plugins are restored from `package.toml` via
   `ya pkg install`, so they are not vendored here.
+  neovim follows the same pattern: its `init.lua` lives in `chezmoi/.chezmoitemplates/nvim/` and renders to `~/AppData/Local/nvim/init.lua` (Windows, `%LOCALAPPDATA%`) and `~/.config/nvim/init.lua` (Linux) via per-OS `.tmpl` wrappers.
 - AI-agent files (e.g. `~/.claude/CLAUDE.md`, `.cursorrules`) are a reserved
   slot: drop them into `chezmoi/` as normal dotfiles when you're ready. They
   need no structural change.
@@ -43,7 +44,7 @@ Windows (PowerShell): `chezmoi init --apply --source <repo>\chezmoi`
 |------|----|
 | `.zshrc`, `.vimrc`, `.config/i3`, `.config/i3status`, `.config/gtk-3.0` | Linux only |
 | `.psmux.conf`, `AppData/Roaming/herdr/config.toml`, `Documents/PowerShell/...` | Windows only |
-| `.chezmoitemplates/pwsh_profile.ps1`, `.chezmoitemplates/yazi/*` → both OS paths | Cross-platform (one source) |
+| `.chezmoitemplates/pwsh_profile.ps1`, `.chezmoitemplates/yazi/*`, `.chezmoitemplates/nvim/*` → both OS paths | Cross-platform (one source) |
 
 ## Directory structure
 
