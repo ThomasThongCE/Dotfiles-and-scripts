@@ -1,30 +1,31 @@
 # Cross-platform exclusions. Patterns match each entry's target path relative
-# to $HOME and are evaluated as Go templates (chezmoi.io reference/chezmoiignore).
+# Patterns match the target path relative to $HOME; do NOT prefix with `/` (an
+# absolute path is rejected as "invalid path" by stricter chezmoi versions).
 # Logic is inverted: chezmoi installs everything by default, so we ignore on the
 # OSes where a file must NOT exist.
 
 # ── Linux-only targets: ignore everywhere except linux ──
 {{ if ne .chezmoi.os "linux" }}
-/.zshrc
-/.aliases.zsh
-/.vimrc
-/.config/i3
-/.config/i3status
-/.config/gtk-3.0
-/.config/powershell
-/.config/yazi
-/.config/nvim
+.zshrc
+.aliases.zsh
+.vimrc
+.config/i3
+.config/i3status
+.config/gtk-3.0
+.config/powershell
+.config/yazi
+.config/nvim
 {{- end }}
 
 # ── Windows-only targets: ignore everywhere except windows ──
 {{ if ne .chezmoi.os "windows" }}
-/.psmux.conf
-/AppData/Roaming/herdr/config.toml
-/Documents/PowerShell
-/AppData/Roaming/yazi/config/yazi.toml
-/AppData/Roaming/yazi/config/keymap.toml
-/AppData/Roaming/yazi/config/init.lua
-/AppData/Roaming/yazi/config/package.toml
-/AppData/Roaming/yazi/config/mux-open.cmd
-/AppData/Local/nvim
+.psmux.conf
+AppData/Roaming/herdr/config.toml
+Documents/PowerShell
+AppData/Roaming/yazi/config/yazi.toml
+AppData/Roaming/yazi/config/keymap.toml
+AppData/Roaming/yazi/config/init.lua
+AppData/Roaming/yazi/config/package.toml
+AppData/Roaming/yazi/config/mux-open.cmd
+AppData/Local/nvim
 {{- end }}
