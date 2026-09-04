@@ -19,7 +19,7 @@
 {{ if ne .chezmoi.os "windows" }}
 /.psmux.conf
 /AppData/Roaming/herdr/config.toml
-/Documents/PowerShell/Microsoft.PowerShell_profile.ps1
+/Documents/PowerShell
 /AppData/Roaming/yazi/config/yazi.toml
 /AppData/Roaming/yazi/config/keymap.toml
 /AppData/Roaming/yazi/config/init.lua
