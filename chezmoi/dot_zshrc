@@ -141,20 +141,8 @@ function simple_pomodoro() {
     nohup bash -c "sleep ${timer}m && notify-send pomodoro timeup" > /dev/null 2>&1 &
 }
 
-# alias
-alias v='vim'
-alias vi3c='vim ~/.config/i3/config'
-alias vzc='vim ~/.zshrc'
-alias vc='vim ~/.vimrc'
-alias m=make
-alias mj='make -j$(nproc)'
-if [[ $(grep -i Microsoft /proc/version) ]];
-then
-    alias git=~/bin/git.sh
-    alias clang-tidy=~/bin/clang-tidy.sh
-    alias make=~/bin/make.sh
-    alias check='mkdir -p cppcheckBuild && cppcheck.exe --addon=misra --enable=all --inconclusive --platform=unspecified --cppcheck-build-dir=cppcheckBuild --output-file=cppcheck.log --project=Build/compile_commands.json --suppress=missingInclude'
-fi
+# Aliases are sourced from ~/.aliases.zsh (mirrors pwsh aliases.ps1)
+[ -f ~/.aliases.zsh ] && source ~/.aliases.zsh
 
 # platform io
 export PATH=$PATH:~/.platformio/penv/bin
@@ -167,7 +155,6 @@ export GOPATH=$GOPATH:~/Workspace/go/code
 
 # espressif
 export IDF_TOOLS_PATH=/opt/espressif
-alias get_idf='. $HOME/esp/esp-idf/export.sh'
 
 # Enable vim binding mode
 bindkey -v

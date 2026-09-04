@@ -6,6 +6,7 @@
 # ── Linux-only targets: ignore everywhere except linux ──
 {{ if ne .chezmoi.os "linux" }}
 /.zshrc
+/.aliases.zsh
 /.vimrc
 /.config/i3
 /.config/i3status
