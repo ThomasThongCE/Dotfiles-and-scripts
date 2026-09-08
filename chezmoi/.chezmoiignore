@@ -20,12 +20,7 @@
 # ── Windows-only targets: ignore everywhere except windows ──
 {{ if ne .chezmoi.os "windows" }}
 .psmux.conf
-AppData/Roaming/herdr/config.toml
+# entire AppData tree is Windows-only (herdr, yazi, nvim live under it)
+AppData
 Documents/PowerShell
-AppData/Roaming/yazi/config/yazi.toml
-AppData/Roaming/yazi/config/keymap.toml
-AppData/Roaming/yazi/config/init.lua
-AppData/Roaming/yazi/config/package.toml
-AppData/Roaming/yazi/config/mux-open.cmd
-AppData/Local/nvim
 {{- end }}
